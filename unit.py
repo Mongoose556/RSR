@@ -15,7 +15,7 @@ class Unit:
     
     def hit(self, hit_val=1): # just subtract 1 from self.hits_remaining each time it’s called
         self.hits_remaining -= hit_val
-  
+
     def is_alive(self): #return true or false
         return self.hits_remaining > 0
     
@@ -52,7 +52,7 @@ class Unit:
             print("Shot miss!")
         else:
             print(f"Attack result: {attack_result}")
-                       
+
         if attack_result == 1 or 2: #"Hit!" or "Hit and retreat!":
             target_unit.hit()
             print(target_unit.name, f"HIT! Hit count: {target_unit.hits_remaining} ")
