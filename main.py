@@ -21,7 +21,7 @@ def get_number_of_turns():
         try:
             turns = int(input("Number of turns (max 10): "))
         except ValueError:
-            print ("Please enter a valid number")
+            print ("Please enter a valid number between 1 and 10")
         else:
             if turns > 10:
                 turns = 10
@@ -31,37 +31,39 @@ def get_number_of_turns():
 
 
 def game_loop(t): #(turns)
+
+    ''' this loop puts one unit against another until destroyed or out of turns. '''
     
-#this loop puts one unit against another until destroyed or out of turns. 
-#need to change it so unit take turns to attack each other
+    # turn 1, player attacks, 
+    # if enemy alive then
+    # enemy attack else win = true
+    # if player alive then 
+    # turn 2
 
     num_turns = t
+    win = False
+    player_unit = Unit("BLUE") # name
+    enemy_unit = Unit("RED") # enemy
 
-    while num_turns > 0:
-
-        player = Unit("") # name
-        enemy = Unit("") # enemy
-
-        print("Number of turns:", num_turns)
+    while player_unit.is_alive and num_turns > 0:
+        print(player_unit.name, " turn:")
+        player_unit.attack(dice_roll(), enemy_unit)
+        print("Status: ", player_unit.unit_status())
         
-        player.name=input("Unit 1 name: ")
-        enemy.name=input("Unit 2 name: ")
-    
-        while enemy.is_alive(): # ==True
-           
-            player.unit_status()
-            enemy.unit_status()
+        num_turns -= 1
 
-            dice = dice_roll() #10 side die
-            result = player.attack(dice, enemy)
-          
-            num_turns -=1
+        print("Turns remaining: ", num_turns)
+        input("Press a key.")
 
-            f= open("results.txt", "a+")
-            f.write(f"attack result {result} \r\n")
-            f.close()
+        if enemy_unit.is_alive:
+            # win = False
+            print(enemy_unit.name, " turn:")
+            enemy_unit.attack(dice_roll(), player_unit)
+            
+            print("Status: ", enemy_unit.unit_status())
         else:
-            print(enemy.name, "Destroyed!")
+            win = True
+
         
     else:
         print("Game Over")

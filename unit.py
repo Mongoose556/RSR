@@ -17,16 +17,19 @@ class Unit:
         self.hits_remaining -= hit_val
 
     def is_alive(self): #return true or false
+        ''' Check if unit is alive, return bool '''
         return self.hits_remaining > 0
     
     def unit_status(self):
-
+        ''' print unit name, rating, hits '''
         print(self.name, " rating: ", self.attack_rating, " Hits remaining: ", self.hits_remaining)
     
     def retreat(self): #make unit move back 
         pass
 
     def attack(self, roll, target_unit):
+        ''' check results of a dice roll, -1 Destroy, 0 = retreat, 1 = hit, 2 = hit and retreat '''
+
         attack_result = None #init result as empty/null
         # -1 Destroy, 0 = retreat, 1 = hit, 2 = hit and retreat
     
