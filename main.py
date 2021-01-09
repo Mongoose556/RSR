@@ -63,7 +63,7 @@ def game_loop(t): #(turns)
             print("Status: ", enemy_unit.unit_status())
         else:
             win = True
-
+            print("You Win")
         
     else:
         print("Game Over")
